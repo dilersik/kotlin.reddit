@@ -1,0 +1,105 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.28.0'
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+    maven { url "https://jitpack.io" }
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.dilermando.reddit"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Testes
+    testImplementation Libs.junit
+    testImplementation Libs.mockito
+
+    /* Kotlin */
+    implementation Libs.kotlin
+
+    // RX
+    implementation Libs.rxJava
+    implementation Libs.rxAndroid
+
+    /* Android Support libraries */
+    implementation Libs.supportAppcompatV7
+    implementation Libs.supportAppcompatV4
+    implementation Libs.supportRecyclerView
+    implementation Libs.supportCardView
+    implementation Libs.supportDesign
+
+    /* Multidex */
+    implementation Libs.multidex
+
+    /* Logger - Timber */
+    implementation Libs.timber
+
+    /* Memory leak detection - LeakCanary */
+    debugImplementation Libs.leakCannary
+    testImplementation Libs.leakCannaryNoOp
+    releaseImplementation Libs.leakCannaryNoOp
+
+    /* REST Interactions - Retrofit */
+    implementation Libs.retrofit
+    implementation Libs.retrofitRxJava
+    implementation Libs.okhttpLoggingInterceptor
+
+    /* JSON Parsing - Gson */
+    implementation Libs.gson
+    implementation Libs.retrofitGson
+
+    /* Dependency Injection - Dagger */
+    implementation Libs.dagger
+    kapt Libs.daggerCompiler
+    compileOnly Libs.javaxAnnotation
+
+    /* Image loader - Picasso */
+    implementation Libs.picasso
+
+    /* Circle ImageView - CircleImageView */
+    implementation Libs.circleImageView
+
+    /* Calligraphy */
+    implementation Libs.calligraphy
+
+    /* Markdown view*/
+    implementation Libs.markdownView
+
+}
